@@ -12,7 +12,7 @@
 ### Clone our repo
 
 ```bash
-git clone TODO
+git clone git@github.com:PeterWang512/GANSketching.git
 cd GANSketching
 ```
 
