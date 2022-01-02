@@ -130,7 +130,7 @@ The training progress is tracked using `wandb` by default. To disable wandb logg
 
 Please make sure the evaluation set and model weights are downloaded before running the evaluation.
 
-```
+```bash
 # You may have run these scripts already in the previous sections
 bash weights/download_weights.sh
 bash data/download_eval_data.sh
