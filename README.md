@@ -21,6 +21,10 @@ Training process is smooth.
 
 <img src="images/process_church.gif" width="800px"/>
 
+### Speed-up
+
+Comparing with the PyTorch version, our implementation can achieve up to 1.67x speed-up with StyleGAN2 inference, up to 1.62x speed-up with pix2pix inference and 1.06x speed-up with model training process.
+
 ## Getting Started
 
 ### Clone our repo
