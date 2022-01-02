@@ -26,8 +26,8 @@ Training process is smooth.
 ### Clone our repo
 
 ```bash
-git clone TODO
-cd GANSketching
+git clone git@github.com:thkkk/GANSketching_Jittor.git
+cd GANSketching_Jittor
 ```
 
 ### Install packages
