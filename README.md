@@ -1,18 +1,32 @@
-## Sketch Your Own GAN
+# GANSketching in Jittor
 
-论文Sketch Your Own GAN([Wang et al.](https://github.com/PeterWang512/GANSketching))意在构建一个生成式模型GAN，这个模型可以通过一些简单的素描图，控制生成的彩图特征。也即，生成一些彩图，彩图的轮廓与输入的素描图大体相当。
+Implementation of ([Sketch Your Own GAN](https://arxiv.org/abs/2108.02774)) in [Jittor(计图)](https://github.com/Jittor/Jittor).
 
-我们使用[Jittor(计图)](https://github.com/Jittor/Jittor)来对该工作进行复现。
+Original repo: [Here](https://github.com/PeterWang512/GANSketching).
+
+## Notice
+We have tried to match official implementation as close as possible, but we may still miss some details. If you find any bugs when using this implementation, feel free to submit issues.
 
 ## Results
 
+Our implementation can customize a pre-trained GAN to match input sketches like the original paper.
+
+<img src="images/result.png" width="800px"/>
+
+### Training Process
+
+Training process is smooth.
+
+<img src="images/process_cat.gif" width="800px"/>
+
+<img src="images/process_church.gif" width="800px"/>
 
 ## Getting Started
 
 ### Clone our repo
 
 ```bash
-git clone git@github.com:thkkk/GANSketching_Jittor.git
+git clone TODO
 cd GANSketching
 ```
 
@@ -26,7 +40,8 @@ cd GANSketching
 
 ### Download model weights
 
-- Run `bash weights/download_weights.sh`
+- Run `bash weights/download_weights.sh` to download author's pretrained weights, or download our pretrained weights from [here](https://cloud.tsinghua.edu.cn/d/d6c57f33b7784533af61/).
+- Feel free to replace all the `.pth` checkpoint filenames to `.jt` ones.
 
 
 ### Generate samples from a customized model
@@ -101,8 +116,35 @@ bash scripts/train_quickdraw_single_horse0.sh
 
 # Train on sketches of faces (1024px)
 bash scripts/train_authorsketch_ffhq0.sh
+
+# Train on sketches of gabled church.
+bash scripts/train_church.sh
+
+# Train on sketches of standing cat.
+bash scripts/train_standing_cat.sh
 ```
 
 The training progress is tracked using `wandb` by default. To disable wandb logging, please add the `--no_wandb` tag to the training script.
 
 ### Evaluations
+
+Please make sure the evaluation set and model weights are downloaded before running the evaluation.
+
+```
+# You may have run these scripts already in the previous sections
+bash weights/download_weights.sh
+bash data/download_eval_data.sh
+```
+
+Use the following script to evaluate the models, the results will be saved in a csv file specified by the `--output` flag. `--models_list` should contain a list of tuple of model weight paths and evaluation data. Please see `weights/eval_list` for example.
+
+```
+python run_metrics.py --models_list weights/eval_list --output metric_results.csv
+```
+
+## Related Works
+
+- R. Gal, O. Patashnik, H. Maron, A. Bermano, G. Chechik, D. Cohen-Or. ["StyleGAN-NADA: CLIP-Guided Domain Adaptation of Image Generators."](https://arxiv.org/abs/2108.00946). In ArXiv. (concurrent work)
+- D. Bau, S. Liu, T. Wang, J.-Y. Zhu, A. Torralba. ["Rewriting a Deep Generative Model"](https://arxiv.org/abs/2007.15646). In ECCV 2020.
+- Y. Wang, A. Gonzalez-Garcia, D. Berga, L. Herranz, F. S. Khan, J. van de Weijer. ["MineGAN: effective knowledge transfer from GANs to target domains with few images"](https://arxiv.org/abs/1912.05270). In CVPR 2020.
+- M. Eitz, J. Hays, M. Alexa. ["How Do Humans Sketch Objects?"](http://cybertron.cg.tu-berlin.de/eitz/pdf/2012_siggraph_classifysketch.pdf). In SIGGRAPH 2012.
