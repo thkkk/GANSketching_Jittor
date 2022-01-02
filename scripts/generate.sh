@@ -1,0 +1,1 @@
+python generate_with_sketch.py --ckpt checkpoint/$1/$2_net_G.jt --save_dir output/$1
