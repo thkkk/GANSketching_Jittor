@@ -106,3 +106,19 @@ bash scripts/train_authorsketch_ffhq0.sh
 The training progress is tracked using `wandb` by default. To disable wandb logging, please add the `--no_wandb` tag to the training script.
 
 ### Evaluations
+
+Please make sure the evaluation set and model weights are downloaded before running the evaluation.
+
+```bash
+# You may have run these scripts already in the previous sections
+bash weights/download_weights.sh
+bash data/download_eval_data.sh
+```
+
+Use the following script to evaluate the models, the results will be saved in a csv file specified by the ``--output`` flag. ``--models_list`` should contain a list of tuple of model weight paths and evaluation data. Please see `weights/eval_list` for example.
+
+```bash
+python run_metrics.py --models_list weights/eval_list --output metric_results.csv
+```
+
+## 
